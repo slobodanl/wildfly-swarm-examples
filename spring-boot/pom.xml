@@ -35,9 +35,6 @@
   </dependencyManagement>
 
   <modules>
-    <module>actuator</module>
-<!--
     <module>spring-boot-sample-actuator</module>
--->
   </modules>
 </project>

@@ -35,27 +35,63 @@
           </execution>
         </executions>
       </plugin>
+<!--
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <argLine>-XX:MaxJavaStackTraceDepth=-1</argLine>
+          <trimStackTrace>false</trimStackTrace>
+          <includes>
+            <include>**/*Tests.java</include>
+          </includes>
+          <excludes>
+            <exclude>**/Abstract*.java</exclude>
+          </excludes>
+          <systemPropertyVariables>
+            <java.security.egd>file:/dev/./urandom</java.security.egd>
+            <java.awt.headless>true</java.awt.headless>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+-->
     </plugins>
   </build>
 
   <properties>
     <main.basedir>${basedir}/../..</main.basedir>
   </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.wildfly.swarm</groupId>
+        <artifactId>spring-boot</artifactId>
+        <version>1.0.0.Alpha1-SNAPSHOT</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
+
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-       <exclusions>
-          <exclusion>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-websocket</artifactId>
-          </exclusion>
-        </exclusions>
+      <groupId>org.wildfly.swarm</groupId>
+      <artifactId>logging</artifactId>
     </dependency>
+
+    <!-- replace spring-boot-starter-web with org.wildfly.swarm:spring-boot-starter-web -->
+    <dependency>
+      <groupId>org.wildfly.swarm</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-security</artifactId>
@@ -73,75 +109,9 @@
       <artifactId>h2</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
+      <groupId>org.wildfly.swarm</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
-    </dependency>
-
-<!--
-    <dependency>
-      <groupId>org.wildfly.swarm</groupId>
-      <artifactId>logging</artifactId>
-    </dependency>
--->
-    <dependency>
-      <groupId>org.wildfly.swarm</groupId>
-      <artifactId>undertow</artifactId>
-      <exclusions>
-        <exclusion>
-          <groupId>org.wildfly.swarm</groupId>
-          <artifactId>logging</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.wildfly.swarm</groupId>
-          <artifactId>logging-modules</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-
-    <dependency>
-      <groupId>org.wildfly.swarm</groupId>
-      <artifactId>bean-validation</artifactId>
-      <exclusions>
-        <exclusion>
-          <groupId>org.wildfly.swarm</groupId>
-          <artifactId>logging</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.wildfly.swarm</groupId>
-          <artifactId>logging-modules</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-
-    <dependency>
-      <groupId>org.wildfly.swarm</groupId>
-      <artifactId>hibernate-validator</artifactId>
-      <exclusions>
-        <exclusion>
-          <groupId>org.wildfly.swarm</groupId>
-          <artifactId>logging</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.wildfly.swarm</groupId>
-          <artifactId>logging-modules</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-
-    <dependency>
-      <groupId>org.wildfly.swarm</groupId>
-      <artifactId>msc</artifactId>
-      <exclusions>
-        <exclusion>
-          <groupId>org.wildfly.swarm</groupId>
-          <artifactId>logging</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.wildfly.swarm</groupId>
-          <artifactId>logging-modules</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
 
   </dependencies>

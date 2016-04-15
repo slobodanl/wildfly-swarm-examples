@@ -19,7 +19,7 @@ package sample.actuator;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import sample.actuator.temp.SwarmSpringApplication;
+import org.wildfly.swarm.springboot.SpringApplication;
 
 @SpringBootApplication
 public class SampleActuatorApplication implements HealthIndicator {
@@ -30,7 +30,7 @@ public class SampleActuatorApplication implements HealthIndicator {
 	}
 
 	public static void main(String[] args) throws Exception {
-		SwarmSpringApplication.run(SampleActuatorApplication.class, args);
+		SpringApplication.run(SampleActuatorApplication.class, args);
 	}
 
 }
